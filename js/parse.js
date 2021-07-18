@@ -1,4 +1,148 @@
-export default function parse(text) {
+// TO-DO
+// Loop through chat, create strings and evaluate the type of the string.
+export default class WhatsAppChtatParser {
+  constructor(chat) {
+    this.chat = chat
+    this.string = ''
+    this.char = ''
+    this.i = 0
+    
+    this.messages = []
+    this.message = {}
+
+    this.parse()
+  }
+
+  parse() {
+    this.char = this.chat[this.i]
+    while(true) {
+
+      this.parseDate()
+      this.parseTime()
+      this.parseUser()
+      this.parseMessage()
+
+      this.messages.push(this.message)
+      this.message = {}
+
+      if(this.i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  parseDate() {
+    while(true) {
+      if(this.char === ',') {
+        this.message.date = this.string
+        this.advanceToNextParser()
+        break
+      }
+      
+      this.advanceToNextCharacter()
+      if(this.i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  parseTime() {
+    this.skip(1)
+    while(true) {
+      if(this.char === '-') {
+        this.message.time = this.string.trimEnd()
+        this.advanceToNextParser()
+        break
+      }
+      
+      this.advanceToNextCharacter()
+      if(this.i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  parseUser() {
+    while(true) {
+      if(this.char === ':') {
+        this.message.user = this.string.trimStart()
+        this.advanceToNextParser()
+        break
+      }
+      
+      this.advanceToNextCharacter()
+      if(this.i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  parseMessage() {
+    console.log('Parse message start', this.string)
+    this.skip(1)
+    while(true) {
+      if(this.char === '\n') {
+        console.log('Parse message found break line', this.string)
+
+        if(this.checkIfDate()) {
+          console.log('PrintMessage: It was a date')
+          this.message.message = this.string
+          this.advanceToNextParser()
+          break
+        }
+      }
+      
+      this.advanceToNextCharacter()
+      if(this.i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  checkIfDate() {
+    let _i = this.i + 1
+    let _j = 0
+    let tempString = ''
+    while(true) {
+      const char = this.chat[_i]
+      if(char === ',') {
+        return new Date(tempString).toString() != 'Invalid Date'
+      }
+
+      if(_j > 10) {
+        return false
+      }
+
+      tempString = tempString + char
+      _i++
+      _j++
+
+      if(_i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  advanceToNextCharacter() {
+    this.string = this.string + this.char
+    this.i = this.i + 1
+    this.char = this.chat[this.i]
+  }
+
+  advanceToNextParser() {
+    this.string = ''
+    this.i = this.i + 1
+    this.char = this.chat[this.i]
+
+  }
+
+  skip(n) {
+    this.i = this.i + n
+    this.char = this.chat[this.i]
+  }
+}
+
+function parse(text) {
   const targets = ['date', 'time', 'user', 'message']
   const conditions = [',', '-', ':', `\n`]
 

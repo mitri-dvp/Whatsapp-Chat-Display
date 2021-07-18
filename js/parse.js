@@ -16,7 +16,6 @@ export default class WhatsAppChtatParser {
   parse() {
     this.char = this.chat[this.i]
     while(true) {
-
       this.parseDate()
       this.parseTime()
       this.parseUser()
@@ -25,7 +24,8 @@ export default class WhatsAppChtatParser {
       this.messages.push(this.message)
       this.message = {}
 
-      if(this.i > this.chat.length) {
+      if(this.i > this.chat.length - 1) {
+        // console.log('Parse End')
         break
       }
     }
@@ -39,10 +39,11 @@ export default class WhatsAppChtatParser {
         break
       }
       
-      this.advanceToNextCharacter()
       if(this.i > this.chat.length) {
         break
       }
+
+      this.advanceToNextCharacter()
     }
   }
 
@@ -55,10 +56,11 @@ export default class WhatsAppChtatParser {
         break
       }
       
-      this.advanceToNextCharacter()
       if(this.i > this.chat.length) {
         break
       }
+
+      this.advanceToNextCharacter()
     }
   }
 
@@ -70,47 +72,57 @@ export default class WhatsAppChtatParser {
         break
       }
       
-      this.advanceToNextCharacter()
       if(this.i > this.chat.length) {
         break
       }
+
+      this.advanceToNextCharacter()
     }
   }
 
   parseMessage() {
-    console.log('Parse message start', this.string)
+    // console.log('Parse message start', this.string)
     this.skip(1)
     while(true) {
       if(this.char === '\n') {
-        console.log('Parse message found break line', this.string)
+        // console.log('Parse message found break line', this.string)
 
         if(this.checkIfDate()) {
-          console.log('PrintMessage: It was a date')
+          // console.log('PrintMessage: It was a date')
           this.message.message = this.string
           this.advanceToNextParser()
           break
         }
       }
       
-      this.advanceToNextCharacter()
       if(this.i > this.chat.length) {
         break
       }
+      
+      this.advanceToNextCharacter()
     }
   }
 
   checkIfDate() {
+    // console.log('Analyze After', this.string)
     let _i = this.i + 1
     let _j = 0
     let tempString = ''
     while(true) {
       const char = this.chat[_i]
       if(char === ',') {
+        // console.log('Comma detected', tempString)
         return new Date(tempString).toString() != 'Invalid Date'
       }
 
       if(_j > 10) {
+        // console.log('Too long', tempString)
         return false
+      }
+      
+      if(char === undefined) {
+        // console.log('EOF', tempString)
+        return true
       }
 
       tempString = tempString + char
@@ -127,13 +139,13 @@ export default class WhatsAppChtatParser {
     this.string = this.string + this.char
     this.i = this.i + 1
     this.char = this.chat[this.i]
+    // console.log('string modified')
   }
 
   advanceToNextParser() {
     this.string = ''
     this.i = this.i + 1
     this.char = this.chat[this.i]
-
   }
 
   skip(n) {
@@ -156,7 +168,7 @@ function parse(text) {
 
   while (true) {    
     const char = text[i];
-    console.log(conditions[j], j)
+    // console.log(conditions[j], j)
     if(j > 5) break
     if(char === conditions[j]) {
       i++
@@ -168,13 +180,13 @@ function parse(text) {
     }
 
     if(j === 4) {
-      console.log('eval if new message')
-      console.log(i, text[i])
+      // console.log('eval if new message')
+      // console.log(i, text[i])
       i--
       if(Number.isInteger(+text[i])) {
-        console.log(text[i], 'is a number')
+        // console.log(text[i], 'is a number')
         if(Number.isInteger(+text[i+1]) || (text[i + 1] === '/')) {
-          console.log(text[i+1], 'is a number or slash')
+          // console.log(text[i+1], 'is a number or slash')
           messages.push(message)
           message = {}
           j = 0
@@ -196,15 +208,3 @@ function parse(text) {
   }
   return messages
 }
-
-// messages.forEach(message => {
-//   if(message.message === undefined) {
-//     console.log(message)
-//   }
-//   if(users.indexOf(message.user) === -1) {
-//     if(message.user === undefined) {
-//       console.log(message)
-//     }
-//     users.push(message.user)
-//   }
-// })

@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-message-displayer",
+  "version": "1.0.0",
+  "description": "Personal project, allows use to insert an exportes WhatsApp chatlog and display it on the screen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jorge Mitri <mitri.dvp@gmail.com>",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "typescript": "^4.3.5"
+  }
+}

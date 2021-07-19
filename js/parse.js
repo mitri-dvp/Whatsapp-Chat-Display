@@ -9,6 +9,7 @@ export default class WhatsAppChtatParser {
     
     this.messages = []
     this.message = {}
+    this.users = []
 
     this.parse()
   }
@@ -29,6 +30,7 @@ export default class WhatsAppChtatParser {
         break
       }
     }
+    this.getUsers()
   }
 
   parseDate() {
@@ -101,6 +103,14 @@ export default class WhatsAppChtatParser {
       
       this.advanceToNextCharacter()
     }
+  }
+
+  getUsers() {
+    this.messages.forEach(message => {
+      if(this.users.indexOf(message.user) === -1) {
+        this.users.push(message.user)
+      }
+    })
   }
 
   checkIfDate() {

@@ -17,6 +17,7 @@ body {
 
 .container {
   max-width: 500px;
+  width: 100%;
   position: relative;
 }
 
@@ -29,25 +30,6 @@ body {
   background-color: #00bfa5;
   color: #fff;
   padding: 0.75rem 1rem;
-}
-
-.container > header .users {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.container .file {
-  position: absolute;
-}
-
-.container input {
-  width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
 }
 
 .main_view {
@@ -90,3 +72,54 @@ body {
   margin-left: auto;
 }
 
+.container .controls {
+  height: 50px;
+  background-color: #273443;
+  display: flex;
+  justify-content: center;
+}
+.container .controls > div {
+  width: 100%;
+}
+
+/* #drop-area */
+.container .controls .file_upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #273443;
+}
+.container .controls .file_upload form {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .controls .file_upload .file {
+  position: absolute;
+}
+
+.container .controls .file_upload input {
+	opacity: 0;
+	/* overflow: hidden; */
+	position: absolute;
+	z-index: -1;
+}
+.container .controls .file_upload label svg,
+.container .controls .file_upload label {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border: 0.25rem transparent solid;
+}
+.container .controls .file_upload label svg {
+  padding: 0.5rem;
+  border: 0.15rem transparent dashed;
+}
+.container .controls .file_upload:active label svg {
+  opacity: 0.5;
+}
+.container .controls .file_upload.active label svg {
+  border: 0.15rem #fff dashed;
+}

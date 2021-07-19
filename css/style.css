@@ -1,7 +1,7 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap'); */
 @font-face {
   font-family: 'Nexa-Bold';
-  src: url('/assets/fonts/Nexa-Bold.otf') format('opentype');
+  src: url('../assets/fonts/Nexa-Bold.otf') format('opentype');
   font-style: normal;
   font-weight: 400;
   font-display: swap;

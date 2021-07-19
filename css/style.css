@@ -1,4 +1,12 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap'); */
+@font-face {
+  font-family: 'Nexa-Bold';
+  src: url('/assets/fonts/Nexa-Bold.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +21,7 @@ body {
   font-family: 'Roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #222;
   background-color: #d1d7d4;
+  background-color: #fff;
 }
 
 .container {
@@ -28,6 +37,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #00bfa5;
+  background-color: #3329ff;
   color: #fff;
   padding: 0.75rem 1rem;
 }
@@ -75,6 +85,7 @@ body {
 .container .controls {
   height: 50px;
   background-color: #273443;
+  background-color: #040435;
   display: flex;
   justify-content: center;
 }
@@ -88,6 +99,7 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #273443;
+  background-color: #040435;
 }
 .container .controls .file_upload form {
   height: 100%;
@@ -122,4 +134,11 @@ body {
 }
 .container .controls .file_upload.active label svg {
   border: 0.15rem #fff dashed;
+}
+
+.brand {
+  font-family: 'Nexa-Bold';
+  text-decoration: none;
+  color: inherit;
+  margin: auto;
 }

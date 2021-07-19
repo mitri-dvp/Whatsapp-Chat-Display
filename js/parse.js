@@ -1,6 +1,6 @@
 // TO-DO
 // Loop through chat, create strings and evaluate the type of the string.
-export default class WhatsAppChtatParser {
+export default class WhatsAppChatParser {
   constructor(chat) {
     this.chat = chat
     this.string = ''
@@ -16,6 +16,7 @@ export default class WhatsAppChtatParser {
 
   parse() {
     this.char = this.chat[this.i]
+    this.checkAndSkipE2EMessage()
     while(true) {
       this.parseDate()
       this.parseTime()
@@ -138,6 +139,26 @@ export default class WhatsAppChtatParser {
       tempString = tempString + char
       _i++
       _j++
+
+      if(_i > this.chat.length) {
+        break
+      }
+    }
+  }
+
+  checkAndSkipE2EMessage() {
+    let _i = this.i + 1
+    let tempString = ''
+    while(true) {
+      const char = this.chat[_i]
+      if(char === '\n') {
+        if(tempString.includes('Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.'))
+        this.i =_i
+        break
+      }
+
+      tempString = tempString + char
+      _i++
 
       if(_i > this.chat.length) {
         break

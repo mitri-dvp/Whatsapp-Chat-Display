@@ -12,11 +12,47 @@ body {
   min-height: 100vh;
   font-family: 'Roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #222;
+  background-color: #d1d7d4;
+}
+
+.container {
+  max-width: 500px;
+  position: relative;
+}
+
+.container .users {
+  height: 50px;
+  display: flex;
+  gap: .5rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00bfa5;
+  color: #fff;
+  padding: 0.75rem 1rem;
+}
+
+.container > header .users {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.container .file {
+  position: absolute;
+}
+
+.container input {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
 }
 
 .main_view {
   height: 500px;
-  width: 500px;
+  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   background-color: #fff;
   display: flex;
@@ -24,6 +60,7 @@ body {
   gap: .5rem;
   padding: 1rem;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .main_view .message {

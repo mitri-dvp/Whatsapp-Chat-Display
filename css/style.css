@@ -78,6 +78,29 @@ body {
   position: relative;
 }
 
+.main_view .message.date {
+  margin-top: 3rem;
+}
+.main_view .message .date {
+  position: absolute;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  width: max-content;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #3329ff;
+  color: #fff;
+  top: -2.75rem;
+  left: 265px;
+  transform: translateX(-100%);
+}
+.main_view .message.rigth .date {
+  left: initial;
+  right: 265px;
+  transform: translateX(100%);
+}
+
 .main_view .message .user {
   font-size: 0.75rem;
   color: #3329ff;

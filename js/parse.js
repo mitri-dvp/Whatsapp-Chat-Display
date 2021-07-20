@@ -27,7 +27,6 @@ export default class WhatsAppChatParser {
       this.message = {}
 
       if(this.i > this.chat.length - 1) {
-        // console.log('Parse End')
         break
       }
     }
@@ -173,6 +172,7 @@ export default class WhatsAppChatParser {
       const char = this.chat[_i]
       if(char === '\n') {
         if(tempString.includes('Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them. Tap to learn more.'))
+        _i++
         this.i =_i
         break
       }

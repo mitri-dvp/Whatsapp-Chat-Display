@@ -28,9 +28,10 @@ body {
   max-width: 500px;
   width: 100%;
   position: relative;
+  transform: translateY(-25px);
 }
 
-.container .users {
+.container .brand {
   height: 50px;
   display: flex;
   gap: .5rem;
@@ -40,6 +41,18 @@ body {
   background-color: #3329ff;
   color: #fff;
   padding: 0.75rem 1rem;
+}
+.container .brand .brand-link {
+  font-family: 'Nexa-Bold';
+  text-decoration: none;
+  color: inherit;
+  margin: auto;
+}
+
+.container .stats {
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
 }
 
 .main_view {
@@ -65,10 +78,15 @@ body {
   position: relative;
 }
 
+.main_view .message .user {
+  font-size: 0.75rem;
+  color: #3329ff;
+  font-weight: 500;
+  line-height: 1rem;
+}
 .main_view .message .text {
   font-size: 0.95rem;
   line-height: 1.5rem;
-  flex: 1;
   margin-right: 3.5rem;
 }
 .main_view .message .time {
@@ -82,18 +100,23 @@ body {
   margin-left: auto;
 }
 
+/* CONTROLS */
 .container .controls {
   height: 50px;
   background-color: #273443;
   background-color: #040435;
   display: flex;
   justify-content: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  transform: translateY(50px);
+  transition: height 0.2s ease-in-out;
 }
 .container .controls > div {
   width: 100%;
 }
 
-/* #drop-area */
 .container .controls .file_upload {
   display: flex;
   justify-content: center;
@@ -122,23 +145,45 @@ body {
 .container .controls .file_upload label {
   cursor: pointer;
   width: 100%;
-  height: 100%;
+  height: 50px;
+  max-height: 100%;
   border: 0.25rem transparent solid;
 }
 .container .controls .file_upload label svg {
-  padding: 0.5rem;
   border: 0.15rem transparent dashed;
 }
 .container .controls .file_upload:active label svg {
   opacity: 0.5;
 }
-.container .controls .file_upload.active label svg {
+
+.container .controls .file_upload form {
+  padding: 0.5rem;
+}
+.container .controls.active {
+  height: 250px;
+}
+.container .controls.active .file_upload label {
   border: 0.15rem #fff dashed;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.brand {
-  font-family: 'Nexa-Bold';
-  text-decoration: none;
-  color: inherit;
+/* MODAL */
+.modal-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+.modal-body {
+  position: absolute;
+  background-color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.5rem;
+  padding: 1rem;
+  inset: 0;
+  width: 500px;
+  height: 500px;
   margin: auto;
 }

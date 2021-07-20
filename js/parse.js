@@ -9,7 +9,7 @@ export default class WhatsAppChatParser {
     
     this.messages = []
     this.message = {}
-    this.users = []
+    this.users = {}
 
     this.parse()
   }
@@ -107,11 +107,31 @@ export default class WhatsAppChatParser {
   }
 
   getUsers() {
-    this.messages.forEach(message => {
-      if(this.users.indexOf(message.user) === -1) {
-        this.users.push(message.user)
+    let usersCount = 0;
+    let i = 0
+    while (true) {
+      const message = this.messages[i]
+      if(this.users[message.user] === undefined) {
+        this.users[message.user] = {}
+        this.users[message.user].number = usersCount
+        usersCount++
+        
+        this.users[message.user].messages = []
+        this.users[message.user].messages.push(message.message)
+        i++
+        if(i > this.messages.length - 1) {
+          break
+        }
+        continue
       }
-    })
+
+      this.users[message.user].messages.push(message.message)
+
+      i++
+      if(i > this.messages.length - 1) {
+        break
+      }
+    }
   }
 
   checkIfDate() {

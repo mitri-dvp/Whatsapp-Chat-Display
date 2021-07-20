@@ -19,6 +19,7 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: 'Roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #222;
   background-color: #d1d7d4;
   background-color: #fff;
@@ -84,6 +85,7 @@ body {
 .main_view .message .date {
   position: absolute;
   font-size: 0.75rem;
+  font-weight: 700;
   line-height: 1.5rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   width: max-content;
@@ -104,7 +106,7 @@ body {
 .main_view .message .user {
   font-size: 0.75rem;
   color: #3329ff;
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1rem;
 }
 .main_view .message .text {
@@ -194,19 +196,68 @@ body {
 }
 
 /* MODAL */
-.modal-container {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-}
-.modal-body {
+.modal {
+  font-family: 'Nexa-Bold';
   position: absolute;
   background-color: #fff;
   font-size: 0.95rem;
   line-height: 1.5rem;
-  padding: 1rem;
+  padding: 0 2rem;
+  padding-bottom: 2rem;
   inset: 0;
   width: 500px;
   height: 500px;
   margin: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+.modal.dnone {
+  display: none;
+}
+
+.modal > h1 {
+  text-align: center;
+  font-size: 1.25rem;
+  margin: 2rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #3329ff;
+}
+
+.modal .messages {
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  gap: 1rem;
+}
+.modal .messages > p {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  gap: 1rem;
+}
+.modal .messages > p span:last-child {
+  text-align: right;
+}
+
+.modal .bar {
+  width: 100%;
+  
+  border: 1px solid #040435;
+  height: 100%;
+  position: relative;
+}
+.modal .bar .amount {
+  height: 100%;
+  background-color: #3329ff;
+}
+
+.modal .dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.modal .dates > p {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+

@@ -2,11 +2,12 @@ import Parser from './parse.js'
 // import { chat_format_1, chat_format_2, chat_format_1_long, chat_format_1_variation_1 } from './chats.js'
 
 // Elements
-const mainViewDOM = document.querySelector('.main_view')
-const usersDOM = document.querySelector('.users')
 const containerDOM = document.querySelector('.container')
+const mainViewDOM = document.querySelector('.main_view')
+const modalDOM = document.querySelector('.modal')
 const fileUploadDOM = document.querySelector('.file_upload')
 const inputDOM = document.querySelector('.file_upload input')
+const infoDOM = document.querySelector('.info')
 
 
 
@@ -41,6 +42,10 @@ inputDOM.addEventListener('input', (e) => {
   readChatFile(file)
 })
 
+infoDOM.addEventListener('click', () => {
+  modalDOM.classList.toggle('dnone')
+})
+
 // Funcions
 function readChatFile(file) {
   mainViewDOM.innerHTML = `
@@ -62,6 +67,12 @@ function runWhatsAppParser(chat) {
   const result = new Parser(chat)
   console.log(result)
 
+  populateMainView(result)
+  populateModal(result) 
+}
+
+
+function populateMainView(result) {
   mainViewDOM.innerHTML = ''
 
   let prevUser = -1;
@@ -109,5 +120,46 @@ function runWhatsAppParser(chat) {
   
     mainViewDOM.appendChild(messageDOM)
   })
-  
+}
+
+function populateModal(result) {
+  let messagesHTML = `<p>
+    <span>Total:</span>
+    <span>${result.messages.length}</span>
+    <span>100%</span>
+  </p>
+  <div class="bar">
+    <div class="amount"></div>
+  </div>`
+
+  Object.keys(result.users).forEach(user => {
+    const percentage = (result.users[user].messages.length * 100 / result.messages.length).toFixed(2)
+    messagesHTML += `<p>
+    <span>${user}:</span>
+    <span>${result.users[user].messages.length}</span>
+    <span>${percentage}%</span>
+  </p>
+  <div class="bar">
+    <div class="amount" style="width: ${percentage}%;"></div>
+  </div>`
+  })
+
+  modalDOM.innerHTML = `
+  <h1>Mensajes</h1>
+  <div class="messages">
+    ${messagesHTML}
+  </div>
+  <h1>Fecha</h1>
+  <div class="dates">
+    <p>
+      <span>Inicio:</span>
+      <span>${result.messages[0].date}</span>
+    </p>
+    <p>
+      <span>Final:</span>
+      <span>${result.messages[result.messages.length - 1].date}</span>
+    </p>
+  </div>
+  `
+
 }

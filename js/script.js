@@ -1,5 +1,5 @@
 import Parser from './parse.js'
-// import { chat_format_1, chat_format_2, chat_format_1_long, chat_format_1_variation_1 } from './chats.js'
+import { chat_english, chat_spanish} from './chats.js'
 
 // Elements
 const containerDOM = document.querySelector('.container')
@@ -8,6 +8,7 @@ const modalDOM = document.querySelector('.modal')
 const fileUploadDOM = document.querySelector('.file_upload')
 const inputDOM = document.querySelector('.file_upload input')
 const infoDOM = document.querySelector('.info')
+const downloadDOM = document.querySelector('.download')
 
 
 
@@ -46,8 +47,15 @@ infoDOM.addEventListener('click', () => {
   modalDOM.classList.toggle('dnone')
 })
 
+downloadDOM.addEventListener('click', () => {
+  const data = new Blob([chat_spanish], {type: 'text/plain'});
+  const url = window.URL.createObjectURL(data);
+  downloadDOM.href = url;
+})
+
 // Funcions
 function readChatFile(file) {
+  modalDOM.classList.add('dnone')
   mainViewDOM.innerHTML = `
   <img src="./assets/loading.gif" width="200px" height="" style="margin: auto;">
   `

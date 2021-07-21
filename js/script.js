@@ -80,29 +80,29 @@ function populateMainView(result) {
   result.messages.forEach(message => {
     const messageDOM = document.createElement('div')
     messageDOM.classList.add('message')
-
+    
     if(result.users[message.user].number === 1) {
       messageDOM.classList.add('rigth')
     }
-  
-    // DATE
-    const currentData = message.date
-    if(currentData != prevDate) {
-      const dateDOM = document.createElement('div')
-      dateDOM.classList.add('date')
-      dateDOM.innerHTML = message.date
-      prevDate = currentData
-      messageDOM.classList.add('date')
-      messageDOM.appendChild(dateDOM)
-    }
-
+    
     // USER
-    if(result.users[message.user].number != prevUser) {
+    const currentDate = message.date
+    if(result.users[message.user].number != prevUser || currentDate != prevDate) {
       const userDOM = document.createElement('div')
       userDOM.classList.add('user')
       userDOM.innerHTML = message.user
       prevUser = result.users[message.user].number
       messageDOM.appendChild(userDOM)
+    }
+
+    // DATE
+    if(currentDate != prevDate) {
+      const dateDOM = document.createElement('div')
+      dateDOM.classList.add('date')
+      dateDOM.innerHTML = message.date
+      prevDate = currentDate
+      messageDOM.classList.add('date')
+      messageDOM.appendChild(dateDOM)
     }
 
     // TEXT

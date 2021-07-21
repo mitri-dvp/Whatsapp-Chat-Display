@@ -65,7 +65,6 @@ function readChatFile(file) {
 
 function runWhatsAppParser(chat) {
   const result = new Parser(chat)
-  console.log(result)
 
   populateMainView(result)
   populateModal(result) 
@@ -76,7 +75,7 @@ function populateMainView(result) {
   mainViewDOM.innerHTML = ''
 
   let prevUser = -1;
-  let prevDay = -1;
+  let prevDate = -1;
 
   result.messages.forEach(message => {
     const messageDOM = document.createElement('div')
@@ -87,12 +86,12 @@ function populateMainView(result) {
     }
   
     // DATE
-    const currentDay = message.date.split('/')[1]
-    if(currentDay != prevDay) {
+    const currentData = message.date
+    if(currentData != prevDate) {
       const dateDOM = document.createElement('div')
       dateDOM.classList.add('date')
       dateDOM.innerHTML = message.date
-      prevDay = currentDay
+      prevDate = currentData
       messageDOM.classList.add('date')
       messageDOM.appendChild(dateDOM)
     }

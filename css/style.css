@@ -245,10 +245,12 @@ body {
   
   border: 1px solid #040435;
   height: 100%;
+  max-height: 1.3rem;
   position: relative;
 }
 .modal .bar .amount {
   height: 100%;
+  max-height: 1.3rem;
   background-color: #3329ff;
 }
 

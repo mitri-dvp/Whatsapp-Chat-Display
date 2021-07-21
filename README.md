@@ -1,5 +1,5 @@
 # WhatsApp Chat Displayer  
-This is an application that allows users to read an exported WhatsApp Chat in the default .txt format.  
+This is an application that allows users to read an exported WhatsApp Chat in the default .txt format both English and Spanish exports.  
 ### Features
   - Drag & Drop functionality.  
   - Custom UI similar to a real WhatsApp Chat.  

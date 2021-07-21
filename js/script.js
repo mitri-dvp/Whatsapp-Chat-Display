@@ -109,8 +109,7 @@ function populateMainView(result) {
       dateDOM.classList.add('date')
       dateDOM.innerHTML = message.date
       prevDate = currentDate
-      messageDOM.classList.add('date')
-      messageDOM.appendChild(dateDOM)
+      mainViewDOM.appendChild(dateDOM)
     }
 
     // TEXT

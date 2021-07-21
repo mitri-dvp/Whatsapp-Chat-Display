@@ -79,11 +79,7 @@ body {
   position: relative;
 }
 
-.main_view .message.date {
-  margin-top: 3rem;
-}
-.main_view .message .date {
-  position: absolute;
+.main_view .date {
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.5rem;
@@ -93,9 +89,7 @@ body {
   border-radius: 0.5rem;
   background-color: #3329ff;
   color: #fff;
-  top: -2.75rem;
-  left: 265px;
-  transform: translateX(-100%);
+  margin: auto;
 }
 .main_view .message.rigth .date {
   left: initial;

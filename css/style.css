@@ -284,9 +284,17 @@ body {
   }
   .container {
     transform: translateY(0);
+    min-height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
   }
   .modal {
     margin-top: 50px;
+    min-height: calc(100vh - 50px);
+    max-height: calc(100vh - 50px);
   }
-  
+  .main_view {
+    flex: 1;
+  }
 }

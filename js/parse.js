@@ -9,8 +9,13 @@ export default class WhatsAppChatParser {
     
     this.messages = []
     this.message = {}
+
+    this.usersCount = 0
     this.users = {}
 
+    this.currentDate = -1
+    this.dates = {}
+    
     this.parse()
   }
 
@@ -30,7 +35,7 @@ export default class WhatsAppChatParser {
         break
       }
     }
-    this.getUsers()
+    this.getStats()
   }
 
   parseDate() {
@@ -70,7 +75,19 @@ export default class WhatsAppChatParser {
   parseUser() {
     while(true) {
       if(this.char === ':') {
-        this.message.user = this.string.trimStart()
+        const user = this.string.trimStart()
+
+        // Add User to Message
+        this.message.user = user
+
+        // Add User to Users
+        if(this.users[user] === undefined) {
+          this.users[user] = {}
+          this.users[user].number = this.usersCount
+          this.users[user].messages = []
+          this.usersCount = this.usersCount + 1
+        }
+
         this.advanceToNextParser()
         break
       }
@@ -90,6 +107,14 @@ export default class WhatsAppChatParser {
 
         if(this.checkIfDate()) {
           this.message.message = this.string
+
+          if(this.message.date === this.currentDate) {
+            this.dates[this.currentDate] = this.dates[this.currentDate] + 1
+          } else {
+            this.dates[this.message.date] = 1
+            this.currentDate = this.message.date 
+          }
+
           this.advanceToNextParser()
           break
         }
@@ -98,6 +123,12 @@ export default class WhatsAppChatParser {
       if(this.i > this.chat.length - 1) {
         this.message.message = this.string
         this.advanceToNextParser()
+        if(this.message.date === this.currentDate) {
+          this.dates[this.currentDate] = this.dates[this.currentDate] + 1
+        } else {
+          this.dates[this.message.date] = 1
+          this.currentDate = this.message.date 
+        }
         break
       }
       
@@ -105,25 +136,12 @@ export default class WhatsAppChatParser {
     }
   }
 
-  getUsers() {
-    let usersCount = 0;
+  getStats() {
     let i = 0
     while (true) {
       const message = this.messages[i]
-      if(this.users[message.user] === undefined) {
-        this.users[message.user] = {}
-        this.users[message.user].number = usersCount
-        usersCount++
-        
-        this.users[message.user].messages = []
-        this.users[message.user].messages.push(message.message)
-        i++
-        if(i > this.messages.length - 1) {
-          break
-        }
-        continue
-      }
 
+      // Determine messages ér user
       this.users[message.user].messages.push(message.message)
 
       i++

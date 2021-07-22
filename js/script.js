@@ -129,6 +129,7 @@ function populateMainView(result) {
 }
 
 function populateModal(result) {
+  // Messages
   let messagesHTML = `<p>
     <span>Total:</span>
     <span>${result.messages.length}</span>
@@ -138,6 +139,7 @@ function populateModal(result) {
     <div class="amount"></div>
   </div>`
 
+  // Users
   Object.keys(result.users).forEach(user => {
     const percentage = (result.users[user].messages.length * 100 / result.messages.length).toFixed(2)
     messagesHTML += `<p>
@@ -149,6 +151,30 @@ function populateModal(result) {
     <div class="amount" style="width: ${percentage}%;"></div>
   </div>`
   })
+
+  // Activity
+  let activityHTML = ``
+  const sortedDates = Object.entries(result.dates)
+  .sort(([,a],[,b]) => b-a)
+  .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+
+  const arraySortedDates = Object.entries(sortedDates)
+  for (let i = 0; i < arraySortedDates.length; i++) {
+    const date = arraySortedDates[i];
+    // const percentage = ((date[1] * 100) / result.messages.length).toFixed(2)
+    const percentage = ((date[1] * 100) / arraySortedDates[0][1]).toFixed(2)
+    activityHTML += `<div>
+      <p>${date[0]}</p>
+      <div class="bar" >
+        <div class="percent">${percentage}%</div>
+        <div class="amount" style="height: ${percentage}%"></div>
+      </div>
+      <p>${date[1]}</p>
+    </div>`
+    // if(i > 3) {
+    //   break
+    // }
+  }
 
   modalDOM.innerHTML = `
   <h1>Mensajes</h1>
@@ -165,6 +191,10 @@ function populateModal(result) {
       <span>Final:</span>
       <span>${result.messages[result.messages.length - 1].date}</span>
     </p>
+  </div>
+  <h1>actividad</h1>
+  <div class="activity">
+    ${activityHTML}
   </div>
   `
 

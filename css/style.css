@@ -69,6 +69,23 @@ body {
   overflow-x: hidden;
 }
 
+.main_view h1 {
+  font-size: 1rem;
+  margin: 0;
+}
+.main_view .download {
+  cursor: pointer;
+  width: max-content;
+}
+.main_view .download:active {
+  opacity: 0.5;
+}
+
+.main_view .download svg {
+  fill: #fff;
+  fill: #222;
+}
+
 .main_view .message {
   max-width: 70%;
   background-color: #fff;
@@ -89,7 +106,7 @@ body {
   border-radius: 0.5rem;
   background-color: #3329ff;
   color: #fff;
-  margin: auto;
+  margin: 0 auto;
 }
 .main_view .message.rigth .date {
   left: initial;
@@ -122,7 +139,6 @@ body {
 /* CONTROLS */
 .container .controls {
   height: 50px;
-  background-color: #273443;
   background-color: #040435;
   display: flex;
   justify-content: center;
@@ -140,7 +156,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #273443;
   background-color: #040435;
   z-index: 1;
 }
@@ -259,24 +274,6 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
-.modal .download {
-  margin: auto;
-  width: 3.5rem;
-  height: 3rem;
-  background-color: #3329ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-.modal .download:active {
-  opacity: 0.9;
-}
-
-.modal .download svg {
-  fill: #fff;
-}
-
 .modal .activity {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

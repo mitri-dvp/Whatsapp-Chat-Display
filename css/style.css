@@ -120,7 +120,9 @@ body {
 }
 
 .introduction .date,
+.main_view .view_all,
 .main_view .view_more,
+.activity .view_all,
 .activity .view_more,
 .main_view .date {
   font-size: 0.75rem;
@@ -134,8 +136,14 @@ body {
   color: #fff;
   margin: 0 auto;
 }
+.main_view .view_all,
+.main_view .view_more {
+  margin: unset;
+}
 
+.activity .view_all,
 .activity .view_more,
+.main_view .view_all,
 .main_view .view_more {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -148,9 +156,15 @@ body {
   color: #fff;
   margin-top: 0.5rem;
 }
+.activity .view_all:active,
 .activity .view_more:active,
+.main_view .view_all:active,
 .main_view .view_more:active {
   opacity: 0.85;
+}
+
+.main_view .view_all.loading {
+  cursor: progress;
 }
 
 
@@ -180,6 +194,12 @@ body {
   margin-left: auto;
 }
 
+.main_view .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
 /* CONTROLS */
 .container .controls {
   height: 50px;
@@ -381,13 +401,15 @@ body {
   border-bottom: 1px solid;
 }
 
+.modal .activity .view_all,
 .modal .activity .view_more {
   position: absolute;
   left: 50%;
   bottom: -2.5rem;
   font-weight: 300;
-  transform: translateX(-50%);
 }
+.modal .activity .view_all {transform: translateX(calc(-50% + 3rem));}
+.modal .activity .view_more {transform: translateX(calc(-50% - 3rem));}
 
 @media(max-width: 500px) {
   body {

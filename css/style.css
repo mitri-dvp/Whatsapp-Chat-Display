@@ -50,12 +50,21 @@ body {
   margin: auto;
 }
 
+.container .home,
 .container .stats {
   position: absolute;
-  right: 1rem;
   cursor: pointer;
 }
+.container .stats {right: 1rem;}
+.container .home {left: 1rem;}
 
+.container .home:active,
+.container .stats:active {
+  opacity: 0.5;
+}
+
+
+.introduction,
 .main_view {
   height: 500px;
   width: 100%;
@@ -69,23 +78,37 @@ body {
   overflow-x: hidden;
 }
 
+.introduction {
+  position: absolute;
+  top: 50px;
+}
+.introduction.dnone {
+  display: none;
+}
+
+
+.introduction h1,
 .main_view h1 {
   font-size: 1rem;
   margin: 0;
 }
+.introduction .download,
 .main_view .download {
   cursor: pointer;
   width: max-content;
 }
+.introduction .download:active,
 .main_view .download:active {
   opacity: 0.5;
 }
 
+.introduction .download svg,
 .main_view .download svg {
   fill: #fff;
   fill: #222;
 }
 
+.introduction .message,
 .main_view .message {
   max-width: 70%;
   background-color: #fff;
@@ -96,6 +119,9 @@ body {
   position: relative;
 }
 
+.introduction .date,
+.main_view .view_more,
+.activity .view_more,
 .main_view .date {
   font-size: 0.75rem;
   font-weight: 700;
@@ -108,23 +134,40 @@ body {
   color: #fff;
   margin: 0 auto;
 }
-.main_view .message.rigth .date {
-  left: initial;
-  right: 265px;
-  transform: translateX(100%);
+
+.activity .view_more,
+.main_view .view_more {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  user-select: none;
+  cursor: pointer;
+  background-color: #fff;
+  color: #222;
+  /* box-shadow: none; */
+  background-color: #040435;
+  color: #fff;
+  margin-top: 0.5rem;
+}
+.activity .view_more:active,
+.main_view .view_more:active {
+  opacity: 0.85;
 }
 
+
+.introduction .message .user,
 .main_view .message .user {
   font-size: 0.75rem;
   color: #3329ff;
   font-weight: 700;
   line-height: 1rem;
 }
+.introduction .message .text,
 .main_view .message .text {
   font-size: 0.95rem;
   line-height: 1.5rem;
   margin-right: 3.5rem;
 }
+.introduction .message .time,
 .main_view .message .time {
   position: absolute;
   right: 0.5rem;
@@ -132,6 +175,7 @@ body {
   font-size: 0.75rem;
   color: #555;
 }
+.introduction .message.rigth,
 .main_view .message.rigth {
   margin-left: auto;
 }
@@ -146,7 +190,7 @@ body {
   width: 100%;
   bottom: 0;
   transform: translateY(50px);
-  transition: height 0.2s ease-in-out;
+  transition: height 0.4s;
 }
 .container .controls > div {
   width: 100%;
@@ -195,7 +239,7 @@ body {
   padding: 0.5rem;
 }
 .container .controls.active {
-  height: 250px;
+  height: 400px;
 }
 .container .controls.active .file_upload label {
   border: 0.15rem #fff dashed;
@@ -234,6 +278,10 @@ body {
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #3329ff;
+}
+
+.modal .back {
+  margin: 0;
 }
 
 .modal .messages {
@@ -278,7 +326,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 0.5rem;
+  position: relative;
 }
+.modal .activity.with_view_more {
+  margin-bottom: 2rem;
+}
+
 
 .modal .activity > div {
   display: flex;
@@ -312,6 +365,30 @@ body {
   transform: translateX(calc(-100% - 0.25rem)) translateY(-50%);
 }
 
+.modal .activity .date {
+  width: max-content;
+  margin: auto;
+  line-height: 0.85rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+}
+.modal .activity .date.loading {
+  cursor: progress;
+}
+
+.modal .activity .date:hover {
+  border-bottom: 1px solid;
+}
+
+.modal .activity .view_more {
+  position: absolute;
+  left: 50%;
+  bottom: -2.5rem;
+  font-weight: 300;
+  transform: translateX(-50%);
+}
+
 @media(max-width: 500px) {
   body {
     align-items: flex-start;
@@ -322,10 +399,14 @@ body {
     display: flex;
     flex-direction: column;
   }
+  .introduction {
+    height: calc(100vh - 100px);
+  }
   .modal {
     margin-top: 50px;
     height: calc(100vh - 100px);
   }
+  .introduction,
   .main_view {
     flex: 1;
   }

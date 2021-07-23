@@ -92,6 +92,7 @@ function runWhatsAppParser(chat) {
   try {
     result = new Parser(chat)
   } catch (error) {
+    console.error(error)
     modalDOM.innerHTML = `
     <p style="text-align: center; margin-top: 1rem;">Seleccione un chat válido...</p>
     `

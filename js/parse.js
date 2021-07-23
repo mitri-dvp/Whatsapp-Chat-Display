@@ -35,7 +35,6 @@ export default class WhatsAppChatParser {
         break
       }
     }
-    this.getStats()
   }
 
   parseDate() {
@@ -115,6 +114,8 @@ export default class WhatsAppChatParser {
             this.currentDate = this.message.date 
           }
 
+          this.users[this.message.user].messages.push(this.message.message)
+
           this.advanceToNextParser()
           break
         }
@@ -133,21 +134,6 @@ export default class WhatsAppChatParser {
       }
       
       this.advanceToNextCharacter()
-    }
-  }
-
-  getStats() {
-    let i = 0
-    while (true) {
-      const message = this.messages[i]
-
-      // Determine messages ér user
-      this.users[message.user].messages.push(message.message)
-
-      i++
-      if(i > this.messages.length - 1) {
-        break
-      }
     }
   }
 

@@ -55,14 +55,16 @@ downloadDOM.addEventListener('click', () => {
 
 // Funcions
 function readChatFile(file) {
-  modalDOM.classList.add('dnone')
-  mainViewDOM.innerHTML = `
-  <img src="./assets/loading.gif" width="200px" height="" style="margin: auto;">
-  `
   const fileReader = new FileReader()
   fileReader.readAsText(file)
 
   fileReader.onload = () => {
+    modalDOM.classList.remove('dnone')
+    modalDOM.innerHTML = `
+    <div style="height: 100%; width:100%;display:flex;justify-content:center;align-items:center;">
+    <img src="./assets/loading.gif" style="margin: auto;" width="200px" height="">
+    </div>
+    `
     runWhatsAppParser(fileReader.result)
   }
 
@@ -72,7 +74,18 @@ function readChatFile(file) {
 }
 
 function runWhatsAppParser(chat) {
-  const result = new Parser(chat)
+  let result;
+  try {
+    
+    result = new Parser(chat)
+  } catch (error) {
+    modalDOM.innerHTML = `
+    <p style="text-align: center; margin-top: 1rem;">Seleccione un chat válido...</p>
+    `
+    return
+  }
+
+  modalDOM.classList.add('dnone')
 
   populateMainView(result)
   populateModal(result) 
